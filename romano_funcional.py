@@ -1,3 +1,6 @@
+class RomanNumberError(Exception):
+    pass
+
 componentes = {
     1000: 'M', 2000: 'MM', 3000: 'MMM', 
     100: 'C', 200: 'CC', 300: 'CCC',
@@ -12,7 +15,7 @@ componentes = {
 }    
 
 simbolos_romanos = {
-    'M': 1000, 'D': 500, 'C': 100, 'L': 50, 'X': 10, 'V': 5, 'I': 1
+    'M': 1000, 'D': 500, 'C': 100, 'L': 50, 'X': 10, 'V': 5, 'I': 1, '': 0
 }
 
 def entero_a_romano(numero):
@@ -30,8 +33,33 @@ def entero_a_romano(numero):
 
 def romano_a_entero(romano: str) -> int:
     res = 0
+    #variable para guardar el caracter
+    anterior = ''
     for i in romano:
-        res += simbolos_romanos[i]
+        
+        #comprobamos si el caracter anterior es el mismo
+        if i == anterior:
+            contador_rep += 1
+        #reseteamos contador
+        else:
+            contador_rep = 1
+        #rompemos el for si el contador pasa de 3
+        if contador_rep > 3:
+            return 'No se pueden poner más de tres letras seguidas'
+            #cambiar por raise RomanNumberError('No se pueden dar más de tres repeticiones')
+        
+        #Condicional por si hay que restar en vez de sumar
+        if simbolos_romanos[i] > simbolos_romanos[anterior]:
+            res = res + simbolos_romanos[i]-2*simbolos_romanos[anterior]
+        else:
+            res += simbolos_romanos[i]
+
+        #recordamos el caracter anterior
+        anterior = i
+
+        
+        
+        
     return res
 
-print(romano_a_entero("MDCCLXIII"))
+print(romano_a_entero('XIV'))
