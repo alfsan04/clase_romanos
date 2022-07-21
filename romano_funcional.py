@@ -38,8 +38,10 @@ def romano_a_entero(romano: str) -> int:
     for i in romano:
         
         #comprobamos si el caracter anterior es el mismo
-        if i == anterior:
+        if i == anterior and i not in ['D','L','V']:
             contador_rep += 1
+        elif i == anterior:
+            return 'La D, la L y la V no se pueden repetir consecutivamente'
         #reseteamos contador
         else:
             contador_rep = 1
@@ -57,9 +59,6 @@ def romano_a_entero(romano: str) -> int:
         #recordamos el caracter anterior
         anterior = i
 
-        
-        
-        
     return res
 
-print(romano_a_entero('XIV'))
+print(romano_a_entero('XIVV'))
