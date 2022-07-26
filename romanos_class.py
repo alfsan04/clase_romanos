@@ -75,6 +75,20 @@ class NumeroRomano:
 
         return r
 
+    def __add__(self, otro):
+        if isinstance(otro, NumeroRomano):
+            return NumeroRomano(self.valor + otro.valor)
+        elif isinstance(otro, int):
+            return NumeroRomano(self.valor + otro)
+
+    def __radd__(self, otro):
+        if isinstance(otro, int):
+            return NumeroRomano(otro + self.valor)
+        elif isinstance(otro, NumeroRomano):
+            return NumeroRomano(otro.valor + self.valor)
+
     def __repr__(self):
         return self.representacion
-nr = NumeroRomano(34)
+
+nr1 = 45 + NumeroRomano(1)
+print(nr1)
