@@ -32,6 +32,7 @@ def entero_a_romano(numero):
         digitos[ix] = digitos[ix] + "0" * longitud
         romano += componentes.get(int(digitos[ix]), "")
     return romano
+
 def romano_a_entero(romano: str) -> int:
     r = 0
     cont_repes = 1
