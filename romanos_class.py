@@ -82,10 +82,8 @@ class NumeroRomano:
             return NumeroRomano(self.valor + otro)
 
     def __radd__(self, otro):
-        if isinstance(otro, int):
-            return NumeroRomano(otro + self.valor)
-        elif isinstance(otro, NumeroRomano):
-            return NumeroRomano(otro.valor + self.valor)
+        #si viene primero el numero y luego el romano en la suma buscara el radd del romano, por lo que podemos llamar desde aqui a add
+        return self.__add__(otro)
 
     def __repr__(self):
         return self.representacion
